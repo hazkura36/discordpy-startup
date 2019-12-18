@@ -7,6 +7,7 @@ from datetime import datetime
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
+CHANNEL_ID = 645902454860283904
 
 
 @bot.event
@@ -29,7 +30,7 @@ async def time_check():
     sleepTime = 0
     # 現在の時刻
     now = datetime.now().strftime('%H:%M')
-    if now == '22:31' :
+    if now == '22:38' :
         print(now)
         await SendMessage()
         #該当時間だった場合は２重に投稿しないよう３０秒余計に待機
