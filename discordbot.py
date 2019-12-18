@@ -1,6 +1,9 @@
 from discord.ext import commands
 import os
 import traceback
+import discord
+from discord.ext import tasks
+from datetime import datetime 
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -25,8 +28,8 @@ async def SendMessage():
 async def time_check():
     sleepTime = 0
     # 現在の時刻
-    now = datetime.now().strftime('22:26')
-    if now in dateTimeList :
+    now = datetime.now().strftime('%H:%M')
+    if now == '22:31' :
         print(now)
         await SendMessage()
         #該当時間だった場合は２重に投稿しないよう３０秒余計に待機
