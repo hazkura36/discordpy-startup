@@ -9,7 +9,7 @@ bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 CHANNEL_ID = 645902454860283904
 
-
+client = discord.Client()
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
@@ -19,19 +19,17 @@ async def on_command_error(ctx, error):
 async def on_ready():
     print('ready')
 
-
-# 60秒に一回ループ
-@tasks.loop(seconds=60)
-async def loop():
-    channel = client.get_channel(CHANNEL_ID)
-    await channel.send('時間だよ')  
-
-#ループ処理実行
-loop.start()
+@client.event
+async def on_ready():
+    while True:
+        if time.strftime('%H:%M:%S',time.localtime())=='21:00:00':
+            channel = client.get_channel('CHANNEL_ID')
+            await client.send_message(channel, '勝手に喋るよ')
+            sleep(5)
         
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
 
-
+client.run(token)
 bot.run(token)
