@@ -27,6 +27,11 @@ async def on_ready():
             await client.send_message(channel, '勝手に喋るよ')
             sleep(5)
         
+@client.event
+async def on_message(message):
+    if message.content.startswith('挨拶して'):
+        reply = 'こんにちは'
+        await client.send_message(message.channel, reply)        
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
